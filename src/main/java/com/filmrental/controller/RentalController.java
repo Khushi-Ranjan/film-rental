@@ -5,6 +5,7 @@ import com.filmrental.dto.request.ReturnFilmRequest;
 import com.filmrental.dto.response.RentalResponse;
 import com.filmrental.service.RentalService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +22,5 @@ public class RentalController {
         return ResponseEntity.ok(rentalService.getRentalsByCustomerId(customerId));
     }
 
-    // POST /rentals/rent
-//    @PostMapping("/rent")
-//    public ResponseEntity<RentalResponse> rentFilm(@RequestBody @Valid RentFilmRequest request) {
-//        return ResponseEntity.status(HttpStatus.CREATED).body(rentalService.rentFilm(request));
-//    }
-//
-//    // PUT /rentals/return
-//    @PutMapping("/return")
-//    public ResponseEntity<RentalResponse> returnFilm(@RequestBody @Valid ReturnFilmRequest request) {
-//        return ResponseEntity.ok(rentalService.returnFilm(request));
-//    }
-//
-//    // DELETE /rentals/{rental_id}
-//    @DeleteMapping("/{rentalId}")
-//    public ResponseEntity<Void> deleteRental(@PathVariable Integer rentalId) {
-//        rentalService.deleteRental(rentalId);
-//        return ResponseEntity.noContent().build();
-//    }
+
 }
