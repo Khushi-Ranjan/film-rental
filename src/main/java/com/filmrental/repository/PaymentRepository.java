@@ -10,4 +10,5 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Integer> {
     List<Payment> findByCustomer_CustomerId(Integer customerId);
     List<Payment> findByRental_RentalId(Integer rentalId);
+    boolean existsByCustomer_CustomerId(Integer customerId);
 }

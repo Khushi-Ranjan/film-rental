@@ -1,18 +1,17 @@
 package com.filmrental.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-        import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "store")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@ToString(exclude = "managerStaff")
 public class Store {
 
     @Id
@@ -20,14 +19,15 @@ public class Store {
     @Column(name = "store_id")
     private Integer storeId;
 
-    // Stored as Integer to avoid circular reference with Staff
-    @Column(name = "manager_staff_id", nullable = false)
-    private Integer managerStaffId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_staff_id")
+    @JsonIgnore
+    private Staff managerStaff;
 
-    @Column(name = "address_id", nullable = false)
-    private Integer addressId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
-    @UpdateTimestamp
-    @Column(name = "last_update")
+    @Column(name = "last_update", insertable = false, updatable = false)
     private LocalDateTime lastUpdate;
 }

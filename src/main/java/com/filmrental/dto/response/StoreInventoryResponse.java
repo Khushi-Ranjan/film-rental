@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class StoreResponse {
+public class StoreInventoryResponse {
+    private Integer inventoryId;
+    private Integer filmId;
+    private String filmTitle;
     private Integer storeId;
-    private String address;
-    private String city;
-    private String country;
     private String managerFirstName;
     private String managerLastName;
 }
