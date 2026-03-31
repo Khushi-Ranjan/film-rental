@@ -3,8 +3,8 @@ spring:
     name: film-rental
 
   datasource:
-    url: jdbc:mysql://10.10.166.225:3306/sakila
-    username: remote_user
+    url: jdbc:mysql://localhost:3306/sakila
+    username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
