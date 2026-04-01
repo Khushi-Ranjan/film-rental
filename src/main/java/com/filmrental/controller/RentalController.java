@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RestController @RequestMapping("/api/rentals") @RequiredArgsConstructor
+@RestController @RequestMapping("/api/v1/rentals") @RequiredArgsConstructor
 public class RentalController {
     private final RentalService rentalService;
 
@@ -22,5 +22,5 @@ public class RentalController {
         return ResponseEntity.ok(rentalService.getRentalsByCustomerId(customerId));
     }
 
-
+    
 }
