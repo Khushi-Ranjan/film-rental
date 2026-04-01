@@ -28,18 +28,24 @@ public class FilmServiceImpl implements FilmService {
                 .orElseThrow(() -> new ResourceNotFoundException("Film not found with id: " + id)));
     }
 
-    @Override @Transactional(readOnly=true)
+    @Override
+    @Transactional(readOnly = true)
     public List<FilmResponse> getFilmsByCategoryId(Integer categoryId) {
         List<Film> films = filmRepository.findByCategories_CategoryId(categoryId);
-        if (films.isEmpty()) throw new ResourceNotFoundException("No films found for category id: " + categoryId);
-        return films.stream().map(filmMapper::toResponse).collect(Collectors.toList());
+
+        return films.stream()
+                .map(filmMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    @Override @Transactional(readOnly=true)
+    @Override
+    @Transactional(readOnly = true)
     public List<FilmResponse> getFilmsByActorId(Integer actorId) {
         List<Film> films = filmRepository.findByActors_ActorId(actorId);
-        if (films.isEmpty()) throw new ResourceNotFoundException("No films found for actor id: " + actorId);
-        return films.stream().map(filmMapper::toResponse).collect(Collectors.toList());
+
+        return films.stream()
+                .map(filmMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override @Transactional(readOnly=true)
