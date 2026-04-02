@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${customer.firstName + ' ' + customer.lastName}">Patron</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${customer != null}">
+  <a class="back-link" th:href="@{/customers}">← All patrons</a>
+
+  <header class="page-header page-header--tight">
+    <h1 class="page-title" th:text="${customer.firstName + ' ' + customer.lastName}">Name</h1>
+    <p class="page-subtitle" th:text="${customer.email != null ? customer.email : 'No email on file'}">email</p>
+    <p class="muted small">Customer ID <span th:text="${customer.customerId}">1</span>
+      · Store <span th:text="${customer.storeId}">1</span>
+      · <span th:text="${customer.active != null and customer.active == 1 ? 'Active' : 'Inactive'}">Active</span>
+    </p>
+  </header>
+
+  <section class="section section--table">
+    <h2 class="section-title">Rentals</h2>
+    <div class="empty-state" th:if="${rentals == null or rentals.isEmpty()}">
+      <p>No rentals yet.</p>
+    </div>
+    <div class="table-wrap" th:if="${rentals != null and !rentals.isEmpty()}">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Out</th>
+          <th>Returned</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Film</td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--table">
+    <h2 class="section-title">Payments</h2>
+    <div class="empty-state" th:if="${payments == null or payments.isEmpty()}">
+      <p>No payments recorded.</p>
+    </div>
+    <div class="table-wrap" th:if="${payments != null and !payments.isEmpty()}">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${payments}">
+          <td th:text="${p.paymentId}">1</td>
+          <td th:text="${p.amount != null ? '$' + p.amount : '—'}">$0</td>
+          <td th:text="${p.paymentDate != null ? #temporals.format(p.paymentDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${p.status}">paid</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${customer.firstName + ' ' + customer.lastName}">Patron</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${customer != null}">
+  <a class="back-link" th:href="@{/customers}">← All patrons</a>
+
+  <header class="page-header page-header--tight">
+    <h1 class="page-title" th:text="${customer.firstName + ' ' + customer.lastName}">Name</h1>
+    <p class="page-subtitle" th:text="${customer.email != null ? customer.email : 'No email on file'}">email</p>
+    <p class="muted small">Customer ID <span th:text="${customer.customerId}">1</span>
+      · Store <span th:text="${customer.storeId}">1</span>
+      · <span th:text="${customer.active != null and customer.active == 1 ? 'Active' : 'Inactive'}">Active</span>
+    </p>
+  </header>
+
+  <section class="section section--table">
+    <h2 class="section-title">Rentals</h2>
+    <div class="empty-state" th:if="${rentals == null or rentals.isEmpty()}">
+      <p>No rentals yet.</p>
+    </div>
+    <div class="table-wrap" th:if="${rentals != null and !rentals.isEmpty()}">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Out</th>
+          <th>Returned</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Film</td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--table">
+    <h2 class="section-title">Payments</h2>
+    <div class="empty-state" th:if="${payments == null or payments.isEmpty()}">
+      <p>No payments recorded.</p>
+    </div>
+    <div class="table-wrap" th:if="${payments != null and !payments.isEmpty()}">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${payments}">
+          <td th:text="${p.paymentId}">1</td>
+          <td th:text="${p.amount != null ? '$' + p.amount : '—'}">$0</td>
+          <td th:text="${p.paymentDate != null ? #temporals.format(p.paymentDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${p.status}">paid</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>

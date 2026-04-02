@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${pageHeading} ?: 'Films'">Films</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title" th:text="${pageHeading}">Catalogue</h1>
+    <p class="page-subtitle" th:text="${subtitle}">Browse titles.</p>
+  </header>
+
+  <div class="desk-grid" style="margin-bottom: 1.75rem;">
+    <section class="panel">
+      <h2 class="panel-title">Search by film ID</h2>
+      <form class="form" th:action="@{/films/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.filmId.value)">
+        <label class="field">
+          <span>Film ID</span>
+          <input name="filmId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-primary" type="submit">Open film</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By category ID</h2>
+      <form class="form" th:action="@{/films/category/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.categoryId.value)">
+        <label class="field">
+          <span>Category ID</span>
+          <input name="categoryId" type="number" min="1" required placeholder="e.g. 5">
+        </label>
+        <button class="btn btn-ghost" type="submit">View category</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="card-grid">
+    <article class="film-card" th:each="f : ${filmsPage.content}">
+      <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+        <h2 class="film-card-title" th:text="${f.title}">Title</h2>
+        <p class="film-card-desc" th:text="${f.description != null ? #strings.abbreviate(f.description, 120) : ''}">Description</p>
+        <div class="film-card-foot">
+          <span th:text="${f.language}">English</span>
+          <span class="dot">·</span>
+          <span th:text="${f.length} + ' min'">90 min</span>
+          <span class="spacer"></span>
+          <span class="price" th:text="'$' + ${f.rentalRate}">$4.99</span>
+        </div>
+      </a>
+    </article>
+  </div>
+
+  <nav class="pager" th:if="${filmsPage.totalPages > 1}">
+    <a th:if="${filmsPage.hasPrevious()}"
+       th:href="@{/films(page=${filmsPage.number - 1}, size=${filmsPage.size})}"
+       class="btn btn-ghost">Previous</a>
+    <span class="pager-info"
+          th:text="'Page ' + ${filmsPage.number + 1} + ' of ' + ${filmsPage.totalPages}">Page 1</span>
+    <a th:if="${filmsPage.hasNext()}"
+       th:href="@{/films(page=${filmsPage.number + 1}, size=${filmsPage.size})}"
+       class="btn btn-ghost">Next</a>
+  </nav>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${pageHeading} ?: 'Films'">Films</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title" th:text="${pageHeading}">Catalogue</h1>
+    <p class="page-subtitle" th:text="${subtitle}">Browse titles.</p>
+  </header>
+
+  <div class="desk-grid" style="margin-bottom: 1.75rem;">
+    <section class="panel">
+      <h2 class="panel-title">Search by film ID</h2>
+      <form class="form" th:action="@{/films/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.filmId.value)">
+        <label class="field">
+          <span>Film ID</span>
+          <input name="filmId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-primary" type="submit">Open film</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By category ID</h2>
+      <form class="form" th:action="@{/films/category/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.categoryId.value)">
+        <label class="field">
+          <span>Category ID</span>
+          <input name="categoryId" type="number" min="1" required placeholder="e.g. 5">
+        </label>
+        <button class="btn btn-ghost" type="submit">View category</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="card-grid">
+    <article class="film-card" th:each="f : ${filmsPage.content}">
+      <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+        <h2 class="film-card-title" th:text="${f.title}">Title</h2>
+        <p class="film-card-desc" th:text="${f.description != null ? #strings.abbreviate(f.description, 120) : ''}">Description</p>
+        <div class="film-card-foot">
+          <span th:text="${f.language}">English</span>
+          <span class="dot">·</span>
+          <span th:text="${f.length} + ' min'">90 min</span>
+          <span class="spacer"></span>
+          <span class="price" th:text="'$' + ${f.rentalRate}">$4.99</span>
+        </div>
+      </a>
+    </article>
+  </div>
+
+  <nav class="pager" th:if="${filmsPage.totalPages > 1}">
+    <a th:if="${filmsPage.hasPrevious()}"
+       th:href="@{/films(page=${filmsPage.number - 1}, size=${filmsPage.size})}"
+       class="btn btn-ghost">Previous</a>
+    <span class="pager-info"
+          th:text="'Page ' + ${filmsPage.number + 1} + ' of ' + ${filmsPage.totalPages}">Page 1</span>
+    <a th:if="${filmsPage.hasNext()}"
+       th:href="@{/films(page=${filmsPage.number + 1}, size=${filmsPage.size})}"
+       class="btn btn-ghost">Next</a>
+  </nav>
+</main>
+</body>
+</html>

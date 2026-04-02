@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Store ' + ${store.storeId}">Store</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${store != null}">
+  <a class="back-link" th:href="@{/stores}">← Stores</a>
+
+  <article class="detail">
+    <header class="detail-header">
+      <h1 class="detail-title" th:text="'Store ' + ${store.storeId}">Store</h1>
+      <p class="detail-meta">
+        <span th:text="${store.city}">City</span>
+        <span class="dot">·</span>
+        <span th:text="${store.country}">Country</span>
+      </p>
+    </header>
+
+    <p class="detail-desc" th:text="${store.address != null ? store.address : '—'}">Address</p>
+
+    <dl class="spec-grid">
+      <div class="spec">
+        <dt>Manager</dt>
+        <dd th:text="${store.managerFirstName} + ' ' + ${store.managerLastName}">Name</dd>
+      </div>
+      <div class="spec">
+        <dt>Store ID</dt>
+        <dd th:text="${store.storeId}">1</dd>
+      </div>
+    </dl>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary" th:href="@{/stores/{id}/inventory(id=${store.storeId})}">View inventory</a>
+      <a class="btn btn-ghost" th:href="@{/inventory/store/{id}(id=${store.storeId})}">Availability</a>
+    </div>
+  </article>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Store ' + ${store.storeId}">Store</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${store != null}">
+  <a class="back-link" th:href="@{/}">← Back home</a>
+
+  <article class="detail">
+    <header class="detail-header">
+      <h1 class="detail-title" th:text="'Store ' + ${store.storeId}">Store</h1>
+      <p class="detail-meta">
+        <span th:text="${store.city}">City</span>
+        <span class="dot">·</span>
+        <span th:text="${store.country}">Country</span>
+      </p>
+    </header>
+
+    <p class="detail-desc" th:text="${store.address != null ? store.address : '—'}">Address</p>
+
+    <dl class="spec-grid">
+      <div class="spec">
+        <dt>Manager</dt>
+        <dd th:text="${store.managerFirstName} + ' ' + ${store.managerLastName}">Name</dd>
+      </div>
+      <div class="spec">
+        <dt>Store ID</dt>
+        <dd th:text="${store.storeId}">1</dd>
+      </div>
+    </dl>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary" th:href="@{/stores/{id}/inventory(id=${store.storeId})}">View inventory</a>
+    </div>
+  </article>
+</main>
+</body>
+</html>
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Customer ' + ${customerId} + ' rentals'">Customer rentals</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/rentals}">← Back to rental desk</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Rentals · Customer ' + ${customerId}">Rentals</h1>
+    <p class="page-subtitle">History for a single patron.</p>
+  </header>
+
+  <div class="empty-state" th:if="${rentals == null or rentals.isEmpty()}">
+    <p>No rentals found for this customer.</p>
+  </div>
+
+  <section class="section section--table" th:if="${rentals != null and !rentals.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Out</th>
+          <th>Returned</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Title</td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Customer ' + ${customerId} + ' rentals'">Customer rentals</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/rentals}">← Back to rental desk</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Rentals · Customer ' + ${customerId}">Rentals</h1>
+    <p class="page-subtitle">History for a single patron.</p>
+  </header>
+
+  <div class="empty-state" th:if="${rentals == null or rentals.isEmpty()}">
+    <p>No rentals found for this customer.</p>
+  </div>
+
+  <section class="section section--table" th:if="${rentals != null and !rentals.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Out</th>
+          <th>Returned</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Title</td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+

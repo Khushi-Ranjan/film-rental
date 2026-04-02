@@ -10,6 +10,6 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     List<Customer> findByLastNameContainingIgnoreCase(String lastName);
-    List<Customer> findByActive(Boolean active);
+    List<Customer> findByActive(Integer active);
 
 }

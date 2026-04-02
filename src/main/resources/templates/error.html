@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title"
+         th:text="${status == 404} ? '404 — Not found' : (${status == 500} ? '500 — Server error' : (${status} != null ? ${status} + ' — Error' : 'Error'))">Error</title>
+</head>
+<body>
+<main th:fragment="main">
+  <div class="error-block">
+    <p class="eyebrow" th:text="${status} ?: 'Error'">500</p>
+    <h1 class="page-title"
+        th:text="${status != null and status == 404} ? 'This frame is missing' : 'Something went wrong'">Error</h1>
+    <p class="page-subtitle" th:text="${message}">Message</p>
+    <a class="btn btn-primary" th:href="@{/}">Back home</a>
+  </div>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title"
+         th:text="${status == 404} ? '404 — Not found' : (${status == 500} ? '500 — Server error' : (${status} != null ? ${status} + ' — Error' : 'Error'))">Error</title>
+</head>
+<body>
+<main th:fragment="main">
+  <div class="error-block">
+    <p class="eyebrow" th:text="${status} ?: 'Error'">404</p>
+    <h1 class="page-title"
+        th:text="${status != null and status == 404} ? 'This frame is missing' : 'Something went wrong'">Error</h1>
+    <p class="page-subtitle" th:text="${message}">Message</p>
+    <a class="btn btn-primary" th:href="@{/}">Back home</a>
+  </div>
+</main>
+</body>
+</html>

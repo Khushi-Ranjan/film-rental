@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Inventory</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title">Inventory</h1>
+    <p class="page-subtitle">Check availability by inventory ID, store ID, or film ID.</p>
+  </header>
+
+  <div class="desk-grid">
+    <section class="panel">
+      <h2 class="panel-title">By inventory ID</h2>
+      <form class="form" th:action="@{/inventory/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.inventoryId.value)">
+        <label class="field">
+          <span>Inventory ID</span>
+          <input name="inventoryId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-primary" type="submit">Open</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By store</h2>
+      <form class="form" th:action="@{/inventory/store/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.storeId.value)">
+        <label class="field">
+          <span>Store ID</span>
+          <input name="storeId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-ghost" type="submit">View</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By film</h2>
+      <form class="form" th:action="@{/inventory/film/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.filmId.value)">
+        <label class="field">
+          <span>Film ID</span>
+          <input name="filmId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-ghost" type="submit">View</button>
+      </form>
+    </section>
+  </div>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Inventory</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title">Inventory</h1>
+    <p class="page-subtitle">Check availability by inventory ID, store ID, or film ID.</p>
+  </header>
+
+  <div class="desk-grid">
+    <section class="panel">
+      <h2 class="panel-title">By inventory ID</h2>
+      <form class="form" th:action="@{/inventory/1}" method="get" onsubmit="this.action=this.action.replace('/1','/' + this.inventoryId.value)">
+        <label class="field">
+          <span>Inventory ID</span>
+          <input name="inventoryId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-primary" type="submit">Open</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By store</h2>
+      <form class="form" th:action="@{/inventory/store/1}" method="get" onsubmit="this.action=this.action.replace('/1','/' + this.storeId.value)">
+        <label class="field">
+          <span>Store ID</span>
+          <input name="storeId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-ghost" type="submit">View</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">By film</h2>
+      <form class="form" th:action="@{/inventory/film/1}" method="get" onsubmit="this.action=this.action.replace('/1','/' + this.filmId.value)">
+        <label class="field">
+          <span>Film ID</span>
+          <input name="filmId" type="number" min="1" required placeholder="e.g. 1">
+        </label>
+        <button class="btn btn-ghost" type="submit">View</button>
+      </form>
+    </section>
+  </div>
+</main>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Home</title>
+</head>
+<body>
+<main th:fragment="main">
+  <section class="hero">
+    <p class="eyebrow">Curated rentals</p>
+    <h1 class="hero-title">Stories worth the reel.</h1>
+    <p class="hero-lead">A quiet catalogue of films, rentals, and patrons — brown paper, warm light, no noise.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" th:href="@{/films}">Open catalogue</a>
+      <a class="btn btn-ghost" th:href="@{/rentals}">Desk · rentals</a>
+    </div>
+  </section>
+
+  <section class="section" th:if="${topFilms != null and !topFilms.isEmpty()}">
+    <div class="section-head">
+      <h2 class="section-title">Most rented</h2>
+      <a class="link-arrow" th:href="@{/films}">Full list</a>
+    </div>
+    <div class="card-grid card-grid--featured">
+      <article class="film-card film-card--compact" th:each="f : ${topFilms}">
+        <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+          <h3 class="film-card-title" th:text="${f.title}">Title</h3>
+          <p class="film-card-meta">
+            <span th:text="${f.releaseYear}">2000</span>
+            <span class="dot">·</span>
+            <span th:text="${f.rating}">PG</span>
+          </p>
+        </a>
+      </article>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Home</title>
+</head>
+<body>
+<main th:fragment="main">
+  <section class="hero">
+    <p class="eyebrow">Curated rentals</p>
+    <h1 class="hero-title">Stories worth the reel.</h1>
+    <p class="hero-lead">A quiet catalogue of films, rentals, and patrons — brown paper, warm light, no noise.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" th:href="@{/films}">Open catalogue</a>
+      <a class="btn btn-ghost" th:href="@{/rentals}">Desk · rentals</a>
+    </div>
+  </section>
+
+  <section class="section" th:if="${topFilms != null and !topFilms.isEmpty()}">
+    <div class="section-head">
+      <h2 class="section-title">Most rented</h2>
+      <a class="link-arrow" th:href="@{/films}">Full list</a>
+    </div>
+    <div class="card-grid card-grid--featured">
+      <article class="film-card film-card--compact" th:each="f : ${topFilms}">
+        <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+          <h3 class="film-card-title" th:text="${f.title}">Title</h3>
+          <p class="film-card-meta">
+            <span th:text="${f.releaseYear}">2000</span>
+            <span class="dot">·</span>
+            <span th:text="${f.rating}">PG</span>
+          </p>
+        </a>
+      </article>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -10,6 +10,8 @@ import com.filmrental.repository.FilmRepository;
 import com.filmrental.repository.LanguageRepository;
 import com.filmrental.service.FilmService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -26,6 +28,12 @@ public class FilmServiceImpl implements FilmService {
     public FilmResponse getFilmById(Integer id) {
         return filmMapper.toResponse(filmRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Film not found with id: " + id)));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<FilmResponse> getFilmsPage(Pageable pageable) {
+        return filmRepository.findAll(pageable).map(filmMapper::toResponse);
     }
 
     @Override

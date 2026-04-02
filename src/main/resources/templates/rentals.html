@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Rentals</title>
+</head>
+<body>
+<main th:fragment="main">
+  <div class="toast toast--ok" th:if="${toastSuccess}" th:text="${toastSuccess}">OK</div>
+  <div class="toast toast--err" th:if="${toastError}" th:text="${toastError}">Error</div>
+
+  <header class="page-header">
+    <h1 class="page-title">Rental desk</h1>
+    <p class="page-subtitle">Issue and return copies. Staff view.</p>
+  </header>
+
+  <div class="desk-grid">
+    <section class="panel">
+      <h2 class="panel-title">New rental</h2>
+      <form class="form" th:action="@{/actions/rent}" th:object="${rentForm}" method="post">
+        <label class="field">
+          <span>Customer ID</span>
+          <input type="number" th:field="*{customerId}" min="1" required placeholder="e.g. 1">
+        </label>
+        <label class="field">
+          <span>Film ID</span>
+          <input type="number" th:field="*{filmId}" min="1" required placeholder="from film page">
+        </label>
+        <button type="submit" class="btn btn-primary">Check out</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Return copy</h2>
+      <form class="form" th:action="@{/actions/return}" th:object="${returnForm}" method="post">
+        <label class="field">
+          <span>Rental ID</span>
+          <input type="number" th:field="*{rentalId}" min="1" required>
+        </label>
+        <button type="submit" class="btn btn-ghost">Process return</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Customer rentals</h2>
+      <form class="form" th:action="@{/rentals/customer/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.customerId.value)">
+        <label class="field">
+          <span>Customer ID</span>
+          <input name="customerId" type="number" min="1" required placeholder="e.g. 2">
+        </label>
+        <button type="submit" class="btn btn-ghost">View history</button>
+      </form>
+    </section>
+  </div>
+
+  <section class="section section--table">
+    <h2 class="section-title">All rentals</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Patron</th>
+          <th>Out</th>
+          <th>Due back</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Title</td>
+          <td>
+            <a th:href="@{/customers/{id}(id=${r.customerId})}" th:text="${r.customerName}">Name</a>
+          </td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Rentals</title>
+</head>
+<body>
+<main th:fragment="main">
+  <div class="toast toast--ok" th:if="${toastSuccess}" th:text="${toastSuccess}">OK</div>
+  <div class="toast toast--err" th:if="${toastError}" th:text="${toastError}">Error</div>
+
+  <header class="page-header">
+    <h1 class="page-title">Rental desk</h1>
+    <p class="page-subtitle">Issue and return copies. Staff view.</p>
+  </header>
+
+  <div class="desk-grid">
+    <section class="panel">
+      <h2 class="panel-title">New rental</h2>
+      <form class="form" th:action="@{/actions/rent}" th:object="${rentForm}" method="post">
+        <label class="field">
+          <span>Customer ID</span>
+          <input type="number" th:field="*{customerId}" min="1" required placeholder="e.g. 1">
+        </label>
+        <label class="field">
+          <span>Film ID</span>
+          <input type="number" th:field="*{filmId}" min="1" required placeholder="from film page">
+        </label>
+        <button type="submit" class="btn btn-primary">Check out</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Return copy</h2>
+      <form class="form" th:action="@{/actions/return}" th:object="${returnForm}" method="post">
+        <label class="field">
+          <span>Rental ID</span>
+          <input type="number" th:field="*{rentalId}" min="1" required>
+        </label>
+        <button type="submit" class="btn btn-ghost">Process return</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Customer rentals</h2>
+      <form class="form" th:action="@{/rentals/customer/1}" method="get"
+            onsubmit="this.action=this.action.replace('/1','/' + this.customerId.value)">
+        <label class="field">
+          <span>Customer ID</span>
+          <input name="customerId" type="number" min="1" required placeholder="e.g. 2">
+        </label>
+        <button type="submit" class="btn btn-ghost">View history</button>
+      </form>
+    </section>
+  </div>
+
+  <section class="section section--table">
+    <h2 class="section-title">All rentals</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Film</th>
+          <th>Patron</th>
+          <th>Out</th>
+          <th>Due back</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${rentals}">
+          <td th:text="${r.rentalId}">1</td>
+          <td th:text="${r.filmTitle}">Title</td>
+          <td>
+            <a th:href="@{/customers/{id}(id=${r.customerId})}" th:text="${r.customerName}">Name</a>
+          </td>
+          <td th:text="${r.rentalDate != null ? #temporals.format(r.rentalDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td th:text="${r.returnDate != null ? #temporals.format(r.returnDate, 'yyyy-MM-dd HH:mm') : '—'}">—</td>
+          <td><span class="pill" th:text="${r.status}">active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>

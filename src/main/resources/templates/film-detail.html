@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${film.title}">Film</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${film != null}">
+  <a class="back-link" th:href="@{/films}">← Catalogue</a>
+
+  <article class="detail">
+    <header class="detail-header">
+      <h1 class="detail-title" th:text="${film.title}">Title</h1>
+      <p class="detail-meta">
+        <span th:text="${film.releaseYear}">2006</span>
+        <span class="dot">·</span>
+        <span th:text="${film.language}">English</span>
+        <span class="dot">·</span>
+        <span th:text="${film.rating}">PG-13</span>
+      </p>
+    </header>
+
+    <p class="detail-desc" th:text="${film.description}">Description</p>
+
+    <dl class="spec-grid">
+      <div class="spec">
+        <dt>Rental rate</dt>
+        <dd th:text="'$' + ${film.rentalRate} + ' / ' + ${film.rentalDuration} + ' days'">$4.99</dd>
+      </div>
+      <div class="spec">
+        <dt>Length</dt>
+        <dd th:text="${film.length} + ' minutes'">120</dd>
+      </div>
+      <div class="spec">
+        <dt>Replacement</dt>
+        <dd th:text="'$' + ${film.replacementCost}">$20</dd>
+      </div>
+    </dl>
+
+    <div class="tag-row" th:if="${film.categories != null and !film.categories.isEmpty()}">
+      <span class="tag" th:each="cat : ${film.categories}" th:text="${cat}">Drama</span>
+    </div>
+
+    <section class="sub-block" th:if="${film.actors != null and !film.actors.isEmpty()}">
+      <h2 class="sub-block-title">Cast</h2>
+      <p class="actor-line">
+        <th:block th:each="a, it : ${film.actors}">
+          <span th:text="${a}">Name</span><span th:unless="${it.last}"> · </span>
+        </th:block>
+      </p>
+    </section>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary" th:href="@{/rentals}">Rent from desk</a>
+      <span class="hint">Use film ID <strong th:text="${film.filmId}">1</strong> on the rental form.</span>
+      <a class="btn btn-ghost" th:href="@{/inventory/film/{id}(id=${film.filmId})}">Check availability</a>
+    </div>
+  </article>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="${film.title}">Film</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${film != null}">
+  <a class="back-link" th:href="@{/films}">← Catalogue</a>
+
+  <article class="detail">
+    <header class="detail-header">
+      <h1 class="detail-title" th:text="${film.title}">Title</h1>
+      <p class="detail-meta">
+        <span th:text="${film.releaseYear}">2006</span>
+        <span class="dot">·</span>
+        <span th:text="${film.language}">English</span>
+        <span class="dot">·</span>
+        <span th:text="${film.rating}">PG-13</span>
+      </p>
+    </header>
+
+    <p class="detail-desc" th:text="${film.description}">Description</p>
+
+    <dl class="spec-grid">
+      <div class="spec">
+        <dt>Rental rate</dt>
+        <dd th:text="'$' + ${film.rentalRate} + ' / ' + ${film.rentalDuration} + ' days'">$4.99</dd>
+      </div>
+      <div class="spec">
+        <dt>Length</dt>
+        <dd th:text="${film.length} + ' minutes'">120</dd>
+      </div>
+      <div class="spec">
+        <dt>Replacement</dt>
+        <dd th:text="'$' + ${film.replacementCost}">$20</dd>
+      </div>
+    </dl>
+
+    <div class="tag-row" th:if="${film.categories != null and !film.categories.isEmpty()}">
+      <span class="tag" th:each="cat : ${film.categories}" th:text="${cat}">Drama</span>
+    </div>
+
+    <section class="sub-block" th:if="${film.actors != null and !film.actors.isEmpty()}">
+      <h2 class="sub-block-title">Cast</h2>
+      <p class="actor-line">
+        <th:block th:each="a, it : ${film.actors}">
+          <span th:text="${a}">Name</span><span th:unless="${it.last}"> · </span>
+        </th:block>
+      </p>
+    </section>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary" th:href="@{/rentals}">Rent from desk</a>
+      <span class="hint">Use film ID <strong th:text="${film.filmId}">1</strong> on the rental form.</span>
+    </div>
+  </article>
+</main>
+</body>
+</html>

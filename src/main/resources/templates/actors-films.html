@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Actor ' + ${actorId}">Actor films</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Actor ' + ${actorId}">Actor</h1>
+    <p class="page-subtitle" th:text="${subtitle}">Films featuring this actor.</p>
+    <a class="back-link" th:href="@{/actors}">← Actors</a>
+  </header>
+
+  <div class="empty-state" th:if="${films == null or films.isEmpty()}">
+    <p>No films found for this actor.</p>
+  </div>
+
+  <div class="card-grid" th:if="${films != null and !films.isEmpty()}">
+    <article class="film-card" th:each="f : ${films}">
+      <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+        <h2 class="film-card-title" th:text="${f.title}">Title</h2>
+        <p class="film-card-desc" th:text="${f.description != null ? #strings.abbreviate(f.description, 100) : ''}">Desc</p>
+        <div class="film-card-foot">
+          <span th:text="${f.releaseYear}">2006</span>
+          <span class="dot">·</span>
+          <span th:text="${f.rating}">PG</span>
+          <span class="spacer"></span>
+          <span class="price" th:text="'$' + ${f.rentalRate}">$0.99</span>
+        </div>
+      </a>
+    </article>
+  </div>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Actor ' + ${actorId}">Actor films</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Actor ' + ${actorId}">Actor</h1>
+    <p class="page-subtitle" th:text="${subtitle}">Films featuring this actor.</p>
+    <a class="back-link" th:href="@{/films}">← Back to catalogue</a>
+  </header>
+
+  <div class="empty-state" th:if="${films == null or films.isEmpty()}">
+    <p>No films found for this actor.</p>
+  </div>
+
+  <div class="card-grid" th:if="${films != null and !films.isEmpty()}">
+    <article class="film-card" th:each="f : ${films}">
+      <a th:href="@{/films/{id}(id=${f.filmId})}" class="film-card-link">
+        <h2 class="film-card-title" th:text="${f.title}">Title</h2>
+        <p class="film-card-desc" th:text="${f.description != null ? #strings.abbreviate(f.description, 100) : ''}">Desc</p>
+        <div class="film-card-foot">
+          <span th:text="${f.releaseYear}">2006</span>
+          <span class="dot">·</span>
+          <span th:text="${f.rating}">PG</span>
+          <span class="spacer"></span>
+          <span class="price" th:text="'$' + ${f.rentalRate}">$0.99</span>
+        </div>
+      </a>
+    </article>
+  </div>
+</main>
+</body>
+</html>
+

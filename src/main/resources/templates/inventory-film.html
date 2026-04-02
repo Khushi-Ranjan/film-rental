@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Film ' + ${filmId} + ' · availability'">Inventory by film</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/films/{id}(id=${filmId})}">← Back to film</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Availability · Film ' + ${filmId}">Availability</h1>
+    <p class="page-subtitle">Copies across stores.</p>
+  </header>
+
+  <div class="empty-state" th:if="${inventories == null or inventories.isEmpty()}">
+    <p>No inventory found for this film.</p>
+  </div>
+
+  <section class="section section--table" th:if="${inventories != null and !inventories.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>Inventory ID</th>
+          <th>Store</th>
+          <th>Availability</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inv : ${inventories}">
+          <td>
+            <a th:href="@{/inventory/{id}(id=${inv.inventoryId})}" th:text="${inv.inventoryId}">1</a>
+          </td>
+          <td>
+            <a th:href="@{/inventory/store/{id}(id=${inv.storeId})}" th:text="${inv.storeId}">1</a>
+          </td>
+          <td>
+            <span class="pill" th:text="${inv.available ? 'Available' : 'Checked out'}">Available</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Film ' + ${filmId} + ' · availability'">Inventory by film</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/films/{id}(id=${filmId})}">← Back to film</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Availability · Film ' + ${filmId}">Availability</h1>
+    <p class="page-subtitle">Copies across stores.</p>
+  </header>
+
+  <div class="empty-state" th:if="${inventories == null or inventories.isEmpty()}">
+    <p>No inventory found for this film.</p>
+  </div>
+
+  <section class="section section--table" th:if="${inventories != null and !inventories.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>Inventory ID</th>
+          <th>Store</th>
+          <th>Availability</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inv : ${inventories}">
+          <td>
+            <a th:href="@{/inventory/{id}(id=${inv.inventoryId})}" th:text="${inv.inventoryId}">1</a>
+          </td>
+          <td>
+            <a th:href="@{/inventory/store/{id}(id=${inv.storeId})}" th:text="${inv.storeId}">1</a>
+          </td>
+          <td>
+            <span class="pill" th:text="${inv.available ? 'Available' : 'Checked out'}">Available</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Store ' + ${storeId} + ' inventory'">Store inventory</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/stores/{id}(id=${storeId})}">← Back to store</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Inventory · Store ' + ${storeId}">Inventory</h1>
+    <p class="page-subtitle">Copies at this store.</p>
+  </header>
+
+  <div class="empty-state" th:if="${items == null or items.isEmpty()}">
+    <p>No inventory found for this store.</p>
+  </div>
+
+  <section class="section section--table" th:if="${items != null and !items.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>Inventory ID</th>
+          <th>Film</th>
+          <th>Manager</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inv : ${items}">
+          <td th:text="${inv.inventoryId}">1</td>
+          <td>
+            <a th:href="@{/films/{id}(id=${inv.filmId})}" th:text="${inv.filmTitle}">Title</a>
+          </td>
+          <td th:text="${inv.managerFirstName + ' ' + inv.managerLastName}">Manager</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Store ' + ${storeId} + ' inventory'">Store inventory</title>
+</head>
+<body>
+<main th:fragment="main">
+  <a class="back-link" th:href="@{/stores/{id}(id=${storeId})}">← Back to store</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Inventory · Store ' + ${storeId}">Inventory</h1>
+    <p class="page-subtitle">Copies at this store.</p>
+  </header>
+
+  <div class="empty-state" th:if="${items == null or items.isEmpty()}">
+    <p>No inventory found for this store.</p>
+  </div>
+
+  <section class="section section--table" th:if="${items != null and !items.isEmpty()}">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>Inventory ID</th>
+          <th>Film</th>
+          <th>Manager</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inv : ${items}">
+          <td th:text="${inv.inventoryId}">1</td>
+          <td th:text="${inv.filmTitle}">Title</td>
+          <td th:text="${inv.managerFirstName + ' ' + inv.managerLastName}">Manager</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Inventory ' + ${inventory.inventoryId}">Inventory</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${inventory != null}">
+  <a class="back-link" th:href="@{/inventory}">← Inventory</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Inventory · ' + ${inventory.inventoryId}">Inventory</h1>
+    <p class="page-subtitle" th:text="${inventory.filmTitle}">Film title</p>
+  </header>
+
+  <dl class="spec-grid">
+    <div class="spec">
+      <dt>Film ID</dt>
+      <dd th:text="${inventory.filmId}">1</dd>
+    </div>
+    <div class="spec">
+      <dt>Store ID</dt>
+      <dd th:text="${inventory.storeId}">1</dd>
+    </div>
+    <div class="spec">
+      <dt>Availability</dt>
+      <dd>
+        <span class="pill" th:text="${inventory.available ? 'Available' : 'Checked out'}">Available</span>
+      </dd>
+    </div>
+  </dl>
+
+  <div class="detail-actions">
+    <a class="btn btn-ghost" th:href="@{/films/{id}(id=${inventory.filmId})}">Open film page</a>
+    <a class="btn btn-ghost" th:href="@{/inventory/store/{id}(id=${inventory.storeId})}">Store inventory</a>
+  </div>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title" th:text="'Inventory ' + ${inventory.inventoryId}">Inventory</title>
+</head>
+<body>
+<main th:fragment="main" th:if="${inventory != null}">
+  <a class="back-link" th:href="@{/inventory/store/{id}(id=${inventory.storeId})}">← Back to store inventory</a>
+
+  <header class="page-header">
+    <h1 class="page-title" th:text="'Inventory · ' + ${inventory.inventoryId}">Inventory</h1>
+    <p class="page-subtitle" th:text="${inventory.filmTitle}">Film title</p>
+  </header>
+
+  <dl class="spec-grid">
+    <div class="spec">
+      <dt>Film ID</dt>
+      <dd th:text="${inventory.filmId}">1</dd>
+    </div>
+    <div class="spec">
+      <dt>Store ID</dt>
+      <dd th:text="${inventory.storeId}">1</dd>
+    </div>
+    <div class="spec">
+      <dt>Availability</dt>
+      <dd>
+        <span class="pill" th:text="${inventory.available ? 'Available' : 'Checked out'}">Available</span>
+      </dd>
+    </div>
+  </dl>
+
+  <div class="detail-actions">
+    <a class="btn btn-ghost" th:href="@{/films/{id}(id=${inventory.filmId})}">Open film page</a>
+  </div>
+</main>
+</body>
+</html>
+

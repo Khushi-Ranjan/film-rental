@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Patrons</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title">Patrons</h1>
+    <p class="page-subtitle">Customers in the ledger.</p>
+  </header>
+
+  <section class="panel" style="margin-bottom: 1.5rem;">
+    <h2 class="panel-title">Search by customer ID</h2>
+    <form class="form" th:action="@{/customers/1}" method="get"
+          onsubmit="this.action=this.action.replace('/1','/' + this.customerId.value)">
+      <label class="field">
+        <span>Customer ID</span>
+        <input name="customerId" type="number" min="1" required placeholder="e.g. 1">
+      </label>
+      <button class="btn btn-primary" type="submit">Open patron</button>
+    </form>
+  </section>
+
+  <div class="patron-grid">
+    <a th:each="c : ${customersPage.content}"
+       th:href="@{/customers/{id}(id=${c.customerId})}"
+       class="patron-card">
+      <span class="patron-name" th:text="${c.firstName + ' ' + c.lastName}">Name</span>
+      <span class="patron-email" th:text="${c.email != null ? c.email : '—'}">email</span>
+    </a>
+  </div>
+
+  <nav class="pager" th:if="${customersPage.totalPages > 1}">
+    <a th:if="${customersPage.hasPrevious()}"
+       th:href="@{/customers(page=${customersPage.number - 1}, size=${customersPage.size})}"
+       class="btn btn-ghost">Previous</a>
+    <span class="pager-info"
+          th:text="'Page ' + ${customersPage.number + 1} + ' of ' + ${customersPage.totalPages}">Page 1</span>
+    <a th:if="${customersPage.hasNext()}"
+       th:href="@{/customers(page=${customersPage.number + 1}, size=${customersPage.size})}"
+       class="btn btn-ghost">Next</a>
+  </nav>
+</main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title th:fragment="title">Patrons</title>
+</head>
+<body>
+<main th:fragment="main">
+  <header class="page-header">
+    <h1 class="page-title">Patrons</h1>
+    <p class="page-subtitle">Customers in the ledger.</p>
+  </header>
+
+  <section class="panel" style="margin-bottom: 1.5rem;">
+    <h2 class="panel-title">Search by customer ID</h2>
+    <form class="form" th:action="@{/customers/1}" method="get"
+          onsubmit="this.action=this.action.replace('/1','/' + this.customerId.value)">
+      <label class="field">
+        <span>Customer ID</span>
+        <input name="customerId" type="number" min="1" required placeholder="e.g. 1">
+      </label>
+      <button class="btn btn-primary" type="submit">Open patron</button>
+    </form>
+  </section>
+
+  <div class="patron-grid">
+    <a th:each="c : ${customersPage.content}"
+       th:href="@{/customers/{id}(id=${c.customerId})}"
+       class="patron-card">
+      <span class="patron-name" th:text="${c.firstName + ' ' + c.lastName}">Name</span>
+      <span class="patron-email" th:text="${c.email != null ? c.email : '—'}">email</span>
+    </a>
+  </div>
+
+  <nav class="pager" th:if="${customersPage.totalPages > 1}">
+    <a th:if="${customersPage.hasPrevious()}"
+       th:href="@{/customers(page=${customersPage.number - 1}, size=${customersPage.size})}"
+       class="btn btn-ghost">Previous</a>
+    <span class="pager-info"
+          th:text="'Page ' + ${customersPage.number + 1} + ' of ' + ${customersPage.totalPages}">Page 1</span>
+    <a th:if="${customersPage.hasNext()}"
+       th:href="@{/customers(page=${customersPage.number + 1}, size=${customersPage.size})}"
+       class="btn btn-ghost">Next</a>
+  </nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (title, body)">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:replace="${title}">Film rental</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <a class="brand" th:href="@{/}">
+      <span class="brand-mark"></span>
+      <span class="brand-text">Atelier Cinéma</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a th:href="@{/films}">Films</a>
+      <a th:href="@{/rentals}">Rentals</a>
+      <a th:href="@{/customers}">Patrons</a>
+      <a th:href="@{/stores}">Stores</a>
+      <a th:href="@{/inventory}">Inventory</a>
+      <a th:href="@{/actors}">Actors</a>
+    </nav>
+  </header>
+
+  <nav class="category-strip" th:if="${allCategories != null and !allCategories.isEmpty()}" aria-label="Browse by category">
+    <span class="category-strip-label">Categories</span>
+    <div class="category-chips">
+      <a th:each="c : ${allCategories}"
+         th:href="@{/films/category/{id}(id=${c.categoryId})}"
+         th:text="${c.name}"
+         class="chip">Action</a>
+    </div>
+  </nav>
+
+  <main class="main" th:replace="${body}"></main>
+
+  <footer class="site-footer">
+    <p class="footer-note">Sakila film rental · minimalist desk</p>
+  </footer>
+</div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (title, body)">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:replace="${title}">Film rental</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <a class="brand" th:href="@{/}">
+      <span class="brand-mark"></span>
+      <span class="brand-text">Atelier Cinéma</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a th:href="@{/films}">Films</a>
+      <a th:href="@{/rentals}">Rentals</a>
+      <a th:href="@{/customers}">Patrons</a>
+      <a th:href="@{/stores}">Stores</a>
+      <a th:href="@{/inventory}">Inventory</a>
+      <a th:href="@{/actors}">Actors</a>
+    </nav>
+  </header>
+
+  <nav class="category-strip" th:if="${allCategories != null and !allCategories.isEmpty()}" aria-label="Browse by category">
+    <span class="category-strip-label">Categories</span>
+    <div class="category-chips">
+      <a th:each="c : ${allCategories}"
+         th:href="@{/films/category/{id}(id=${c.categoryId})}"
+         th:text="${c.name}"
+         class="chip">Action</a>
+    </div>
+  </nav>
+
+  <main class="main" th:replace="${body}"></main>
+
+  <footer class="site-footer">
+    <p class="footer-note">Sakila film rental · minimalist desk</p>
+  </footer>
+</div>
+</body>
+</html>
